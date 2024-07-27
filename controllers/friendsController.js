@@ -8,12 +8,12 @@ exports.createFriends = async (user, friends) => {
     if (friends && friends.length > 0) {
       const friendIds = friends.map((friend) => friend.id);
 
-      const friends = await User.findAll({
+      const friendsFetched = await User.findAll({
         where: { facebookId: friendIds },
       });
 
       await Promise.all(
-        friends.map(async (friendUser) => {
+        friendsFetched.map(async (friendUser) => {
           await Friend.create({
             friendA: user.id,
             friendB: friendUser.id,
@@ -23,7 +23,7 @@ exports.createFriends = async (user, friends) => {
     }
     return;
   } catch (err) {
-    console.err(err);
+    console.log(err);
     return;
   }
 };
@@ -70,7 +70,7 @@ exports.getFriends = async (id) => {
     });
     return friends;
   } catch (err) {
-    console.err(err);
+    console.log(err);
     return null;
   }
 };
