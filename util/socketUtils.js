@@ -38,8 +38,10 @@ exports.notifyStatus = async (io, userId, status) => {
   for (const friend of friends) {
     const friendId = friend.id;
     io.to(`user:${friendId}`).emit("friend_status", {
-      userId,
-      status,
+      userId: userId,
+      status: status,
+      challengedMe: false,
+      amIChallenger: false,
     });
   }
 };
