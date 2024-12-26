@@ -25,7 +25,7 @@ const User = sequelize.define(
       type: DataTypes.STRING,
     },
     profilePicUrl: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(2000),
       allowNull: true,
     },
     score: {
