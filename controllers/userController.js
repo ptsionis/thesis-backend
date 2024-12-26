@@ -6,13 +6,10 @@ exports.createUser = async (profile) => {
   try {
     let user = await User.create({
       username: profile.displayName,
-      email: profile.emails ? profile.emails[0].value : null,
-      profilePicUrl: profile.photos ? profile.photos[0].value : null,
+      email: profile?.emails ? profile.emails[0].value : null,
+      profilePicUrl: profile?.photos ? profile.photos[0].value : null,
       facebookId: profile.id,
-      role:
-        profile.emails[0].value === process.env.ADMIN_EMAIL
-          ? Roles.ADMIN
-          : Roles.USER,
+      role: Roles.USER,
     });
 
     return user;
